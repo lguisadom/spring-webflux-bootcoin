@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: service-bootcoin
+  cloud:
+    config:
+      profile: prod
+  config:
+    import: optional:configserver:https://bootcamp2022-ms-bootcoin.azurewebsites.net #(4)
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: health, info, refresh, restart, env
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+    refresh:
+      enabled: true
+    restart:
+      enabled: true
+    env:
+      enabled: true

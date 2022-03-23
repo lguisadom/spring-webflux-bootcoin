@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "33c82e84-4a76-49a0-88f7-d3d9140b6825",
+		"name": "spring-webflux-bootcoin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"purchase\": 3,\r\n    \"sale\":  4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/api/v1/exchange",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"api",
+						"v1",
+						"exchange"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

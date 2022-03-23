@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: service-bootcoin
+  profiles:
+    active:
+    - dev
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: health, info, refresh, restart, env
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+    refresh:
+      enabled: true
+    restart:
+      enabled: true
+    env:
+      enabled: true
