@@ -6,4 +6,5 @@ import reactor.core.publisher.Mono;
 
 public interface ExchangeRateService {
 	Mono<ExchangeRate> create(ExchangeRate exchange);
+	Mono<ExchangeRate> getExchangeRange();
 }
