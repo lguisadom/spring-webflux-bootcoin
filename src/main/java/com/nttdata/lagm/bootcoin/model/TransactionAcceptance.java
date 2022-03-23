@@ -1,6 +1,5 @@
 package com.nttdata.lagm.bootcoin.model;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.bson.types.ObjectId;
@@ -22,14 +21,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-@Document(collection = "transactionRequest")
-public class TransactionRequest {
+@Document(collection = "transactionAcceptance")
+public class TransactionAcceptance {
 	@Id
 	@JsonSerialize(using = ToStringSerializer.class)
 	private ObjectId id;
-	private String identification;
-	private BigDecimal amount;
-	private Integer transactionType;
+	private TransactionRequest transactionRequest;
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime date;
 	private Boolean completed;

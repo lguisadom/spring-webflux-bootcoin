@@ -7,16 +7,16 @@
 	},
 	"item": [
 		{
-			"name": "ExchangeRate",
+			"name": "ExchangeRate - Tasa de Cambio",
 			"item": [
 				{
-					"name": "create",
+					"name": "create - Crea tasa de cambio actual",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"purchase\": 3,\r\n    \"sale\":  4\r\n}",
+							"raw": "{\r\n    \"purchase\": 5,\r\n    \"sale\":  6\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -38,14 +38,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get - Última tasa de cambio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/api/v1/exchange",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"exchange"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "Wallet",
+			"name": "Wallet - Bootcoin billetera",
 			"item": [
 				{
-					"name": "findAll",
+					"name": "findAll - Lista todas las billeteras",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -66,13 +87,13 @@
 					"response": []
 				},
 				{
-					"name": "create",
+					"name": "create - Crea una billetera",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"identification\": \"46687130\",\r\n    \"cellphone\": \"966389312\",\r\n    \"email\": \"luisguisado@gmail.com\",\r\n    \"amount\": 150.5\r\n}",
+							"raw": "{\r\n    \"identification\": \"46687132\",\r\n    \"cellphone\": \"966389314\",\r\n    \"email\": \"luisguisado@gmail.com\",\r\n    \"amount\": 150.5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -90,6 +111,185 @@
 								"api",
 								"v1",
 								"wallet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TransactionRequest - Solicitud de compra",
+			"item": [
+				{
+					"name": "findAll - Lista todas las solicitudes de compra",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/api/v1/transaction/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create - Crea solicitud de compra tipo yanqui",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identification\": \"46687138\",\r\n    \"amount\": 15,\r\n    \"transactionType\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/api/v1/transaction/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create - Crea solicitud de compra tipo transferencia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identification\": \"46687138\",\r\n    \"amount\": 15,\r\n    \"transactionType\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/api/v1/transaction/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Active Request - Consulta solicitudes de compra activas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/api/v1/transaction/request/activeRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"request",
+								"activeRequest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TransactionAcceptance - Aceptación de compra de bitcoin",
+			"item": [
+				{
+					"name": "create - Crea Aceptación de solicitud  de compra",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idTransactionRequest\": \"623ba11735782507af6d792d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/api/v1/transaction/acceptance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"acceptance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create - Crea Aceptación de solicitud  de compra 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idTransactionRequest\": \"623ba11835782507af6d792e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/api/v1/transaction/acceptance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"acceptance"
 							]
 						}
 					},

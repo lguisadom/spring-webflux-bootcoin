@@ -32,7 +32,4 @@ public class TransactionRequestServiceImpl implements TransactionRequestService 
 	public Flux<TransactionRequest> getAllActiveRequest() {
 		return transactionRequestrepository.findAll().filter(t -> Boolean.FALSE.equals(t.getCompleted()));
 	}
-	
-	
-
 }
