@@ -3,7 +3,7 @@ spring:
     name: service-bootcoin
   profiles:
     active:
-    - dev
+    - dev #(2) dev, azure
 management:
   endpoints:
     enabled-by-default: false
