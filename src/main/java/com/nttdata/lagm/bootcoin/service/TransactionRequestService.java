@@ -8,4 +8,5 @@ import reactor.core.publisher.Mono;
 public interface TransactionRequestService {
 	Mono<TransactionRequest> create(TransactionRequest transaction);
 	Flux<TransactionRequest> findAll();
+	Flux<TransactionRequest> getAllActiveRequest();
 }

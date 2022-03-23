@@ -33,4 +33,10 @@ public class TransactionRequestController {
 	private Flux<TransactionRequest> findAll() {
 		return transactionRequestService.findAll();
 	}
+	
+	@GetMapping(value="/activeRequest", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	private Flux<TransactionRequest> getAllActiveRequest() {
+		return transactionRequestService.getAllActiveRequest();
+	}
 }
