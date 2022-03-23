@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.nttdata.lagm.bootcoin.model.ExchangeRate;
 import com.nttdata.lagm.bootcoin.repository.ExchangeRateRepository;
+import com.nttdata.lagm.bootcoin.service.util.Util;
 
 import reactor.core.publisher.Mono;
 
@@ -16,6 +17,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	
 	@Override
 	public Mono<ExchangeRate> create(ExchangeRate exchange) {
+		exchange.setDate(Util.getToday());
 		return exchangeRateRepository.save(exchange);
 	}
 

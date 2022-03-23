@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "33c82e84-4a76-49a0-88f7-d3d9140b6825",
 		"name": "spring-webflux-bootcoin",
+		"description": "El banco debe poder establecer la tasa de compra y venta de Soles a BootCoin",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [

@@ -1,11 +1,13 @@
 package com.nttdata.lagm.bootcoin.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -27,4 +29,6 @@ public class ExchangeRate {
 	private ObjectId id;
 	private BigDecimal purchase;
 	private BigDecimal sale;
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	private LocalDateTime date;
 }
