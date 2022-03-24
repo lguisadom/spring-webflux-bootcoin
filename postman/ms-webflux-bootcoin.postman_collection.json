@@ -122,28 +122,6 @@
 			"name": "TransactionRequest - Solicitud de compra",
 			"item": [
 				{
-					"name": "findAll - Lista todas las solicitudes de compra",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8091/api/v1/transaction/request",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"api",
-								"v1",
-								"transaction",
-								"request"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "create - Crea solicitud de compra tipo yanqui",
 					"request": {
 						"method": "POST",
@@ -206,6 +184,28 @@
 					"response": []
 				},
 				{
+					"name": "findAll - Lista todas las solicitudes de compra",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/api/v1/transaction/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "get Active Request - Consulta solicitudes de compra activas",
 					"request": {
 						"method": "GET",
@@ -234,35 +234,13 @@
 			"name": "TransactionAcceptance - Aceptación de compra de bitcoin",
 			"item": [
 				{
-					"name": "findAll - Lista todas las aceptaciones a solicitud de compra",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8091/api/v1/transaction/acceptance",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"api",
-								"v1",
-								"transaction",
-								"acceptance"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "create - Crea Aceptación de solicitud  de compra",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idTransactionRequest\": \"623bba078ec97d27b000b03b\"\r\n}",
+							"raw": "{\r\n    \"sellerIdentification\": \"46687130\",\r\n    \"idTransactionRequest\": \"623bc27dd87dcc1b37b07e9f\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -293,13 +271,35 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idTransactionRequest\": \"623bba088ec97d27b000b03c\"\r\n}",
+							"raw": "{\r\n    \"sellerIdentification\": \"46687130\",\r\n    \"idTransactionRequest\": \"623bc27fd87dcc1b37b07ea0\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
+						"url": {
+							"raw": "http://localhost:8091/api/v1/transaction/acceptance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"acceptance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll - Lista todas las aceptaciones a solicitud de compra",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "http://localhost:8091/api/v1/transaction/acceptance",
 							"protocol": "http",
