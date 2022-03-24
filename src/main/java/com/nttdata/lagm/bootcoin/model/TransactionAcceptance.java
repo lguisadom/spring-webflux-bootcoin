@@ -26,8 +26,10 @@ public class TransactionAcceptance {
 	@Id
 	@JsonSerialize(using = ToStringSerializer.class)
 	private ObjectId id;
+	private String transactionId;
 	private String sellerIdentification;
 	private TransactionRequest transactionRequest;
+	private ExchangeRate exchangeRate;
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime date;
 	private String status;

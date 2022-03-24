@@ -1,6 +1,7 @@
 package com.nttdata.lagm.bootcoin.service.util;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class Util {
 
@@ -25,5 +26,9 @@ public class Util {
 		}
 		
 		return description;
+	}
+	
+	public static String generateTransactionId() {
+		return UUID.randomUUID().toString();
 	}
 }
