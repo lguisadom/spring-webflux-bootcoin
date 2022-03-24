@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nttdata.lagm.bootcoin.controller.dto.request.TransactionRequestRqDto;
 import com.nttdata.lagm.bootcoin.model.TransactionRequest;
 import com.nttdata.lagm.bootcoin.service.TransactionRequestService;
 
@@ -24,8 +25,8 @@ public class TransactionRequestController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	private Mono<TransactionRequest> create(@RequestBody TransactionRequest transactionRequest) {
-		return transactionRequestService.create(transactionRequest);
+	private Mono<TransactionRequest> create(@RequestBody TransactionRequestRqDto transactionRequestRqDto) {
+		return transactionRequestService.create(transactionRequestRqDto);
 	}
 	
 	@GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
@@ -34,7 +35,7 @@ public class TransactionRequestController {
 		return transactionRequestService.findAll();
 	}
 	
-	@GetMapping(value="/activeRequest", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	@GetMapping(value="/active", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	private Flux<TransactionRequest> getAllActiveRequest() {
 		return transactionRequestService.getAllActiveRequest();

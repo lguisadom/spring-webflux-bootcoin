@@ -7,8 +7,10 @@ import com.nttdata.lagm.bootcoin.controller.dto.request.TransactionAcceptanceRqD
 import com.nttdata.lagm.bootcoin.model.TransactionAcceptance;
 import com.nttdata.lagm.bootcoin.repository.TransactionAcceptanceRepository;
 import com.nttdata.lagm.bootcoin.repository.TransactionRequestRepository;
+import com.nttdata.lagm.bootcoin.service.util.Constants;
 import com.nttdata.lagm.bootcoin.service.util.Util;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -26,9 +28,20 @@ public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceSe
 			.flatMap(transactionRequest -> {
 				TransactionAcceptance transactionAcceptance = new TransactionAcceptance();
 				transactionAcceptance.setDate(Util.getToday());
-				transactionAcceptance.setCompleted(false);
+				transactionAcceptance.setStatus(Constants.STATUS_PROCESSING);
 				transactionAcceptance.setTransactionRequest(transactionRequest);
+				transactionRequest.setStatus(Constants.STATUS_PROCESSING);
 				return transactionAcceptanceRepository.save(transactionAcceptance);		
 			});
+	}
+
+	@Override
+	public Flux<TransactionAcceptance> findAll() {
+		return transactionAcceptanceRepository.findAll();
+	}
+
+	@Override
+	public Flux<TransactionAcceptance> getAllProcessingAcceptance() {
+		return transactionAcceptanceRepository.findAll().filter(t -> Constants.STATUS_PROCESSING.equalsIgnoreCase(t.getStatus()));
 	}
 }

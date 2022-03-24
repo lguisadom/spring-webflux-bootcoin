@@ -29,8 +29,8 @@ public class TransactionRequest {
 	private ObjectId id;
 	private String identification;
 	private BigDecimal amount;
-	private Integer transactionType;
+	private String transactionType;
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime date;
-	private Boolean completed;
+	private String status;
 }
