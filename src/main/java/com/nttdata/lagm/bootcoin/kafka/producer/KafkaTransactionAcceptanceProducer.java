@@ -3,6 +3,7 @@ package com.nttdata.lagm.bootcoin.kafka.producer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,9 @@ public class KafkaTransactionAcceptanceProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaTransactionAcceptanceProducer.class);
 
+    @Value("${kafka.topic.topicTransactionAcceptance}")
+    private String TOPIC_TRANSACTION_ACCEPTANCE;
+    
     private final KafkaTemplate<String, TransactionAcceptance> kafkaTemplate;
 
     public KafkaTransactionAcceptanceProducer(@Qualifier("kafkaTransactionAcceptanceTemplate") KafkaTemplate<String, TransactionAcceptance> kafkaTemplate) {
@@ -21,7 +25,7 @@ public class KafkaTransactionAcceptanceProducer {
 
     public void sendMessage(TransactionAcceptance transactionAcceptance) {
         LOGGER.info("Producing message {}", transactionAcceptance);
-        this.kafkaTemplate.send("TOPIC-Transaction-Acceptance", transactionAcceptance);
+        this.kafkaTemplate.send(TOPIC_TRANSACTION_ACCEPTANCE, transactionAcceptance);
     }
 
 }
