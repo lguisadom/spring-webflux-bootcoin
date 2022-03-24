@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nttdata.lagm.bootcoin.controller.dto.request.TransactionAcceptanceRqDto;
-import com.nttdata.lagm.bootcoin.kafka.KafkaTransactionAcceptanceProducer;
+import com.nttdata.lagm.bootcoin.kafka.message.TransactionAcceptanceMessage;
+import com.nttdata.lagm.bootcoin.kafka.producer.KafkaTransactionAcceptanceProducer;
 import com.nttdata.lagm.bootcoin.model.TransactionAcceptance;
 import com.nttdata.lagm.bootcoin.repository.TransactionAcceptanceRepository;
 import com.nttdata.lagm.bootcoin.repository.TransactionRequestRepository;
@@ -44,8 +45,12 @@ public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceSe
 				transactionAcceptance.setTransactionRequest(transactionRequest);
 				transactionRequest.setStatus(Constants.STATUS_PROCESSING);
 				
+				TransactionAcceptanceMessage transactionAcceptanceMessage = new TransactionAcceptanceMessage();
+				transactionAcceptanceMessage.setId("1");
+				transactionAcceptanceMessage.setSellerIdentification(transactionRequest.getIdentification());
+				kafkaTransactionAcceptanceProducer.sendMessage(transactionAcceptanceMessage);
+				
 				// After validations to send to MS to register the transaction
-				kafkaTransactionAcceptanceProducer.sendMessage(transactionAcceptance);
 				return transactionAcceptanceRepository.save(transactionAcceptance);
 			});
 	}

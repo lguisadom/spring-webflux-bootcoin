@@ -1,4 +1,4 @@
-package com.nttdata.lagm.bootcoin.config;
+package com.nttdata.lagm.bootcoin.kafka.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,12 +12,12 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-import com.nttdata.lagm.bootcoin.model.TransactionAcceptance;
+import com.nttdata.lagm.bootcoin.kafka.message.TransactionAcceptanceMessage;
 
 @Configuration
-public class KafkaStringConfig {
+public class KafkaTransactionAcceptanceConfig {
 
-    public ProducerFactory<String, TransactionAcceptance> producerFactory() {
+    public ProducerFactory<String, TransactionAcceptanceMessage> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -26,7 +26,7 @@ public class KafkaStringConfig {
     }
 
     @Bean(name = "kafkaTransactionAcceptanceTemplate")
-    public KafkaTemplate<String, TransactionAcceptance> kafkaTemplate() {
+    public KafkaTemplate<String, TransactionAcceptanceMessage> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
