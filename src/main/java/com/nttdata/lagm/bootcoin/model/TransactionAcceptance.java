@@ -26,6 +26,7 @@ public class TransactionAcceptance {
 	@Id
 	@JsonSerialize(using = ToStringSerializer.class)
 	private ObjectId id;
+	private String sellerIdentification;
 	private TransactionRequest transactionRequest;
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime date;

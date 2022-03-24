@@ -24,15 +24,20 @@ public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceSe
 	
 	@Override
 	public Mono<TransactionAcceptance> create(TransactionAcceptanceRqDto transactionAcceptanceRqDto) {
+		// TODO Validate sellerIdentification
 		return transactionRequestRepository.findById(transactionAcceptanceRqDto.getIdTransactionRequest())
 			.flatMap(transactionRequest -> {
+				transactionRequest.setStatus(Constants.STATUS_PROCESSING);
+				transactionRequestRepository.save(transactionRequest).subscribe();
 				TransactionAcceptance transactionAcceptance = new TransactionAcceptance();
+				transactionAcceptance.setSellerIdentification(transactionAcceptanceRqDto.getSellerIdentification());
 				transactionAcceptance.setDate(Util.getToday());
 				transactionAcceptance.setStatus(Constants.STATUS_PROCESSING);
 				transactionAcceptance.setTransactionRequest(transactionRequest);
 				transactionRequest.setStatus(Constants.STATUS_PROCESSING);
-				return transactionAcceptanceRepository.save(transactionAcceptance);		
-			});
+				
+				return transactionAcceptanceRepository.save(transactionAcceptance);
+				});
 	}
 
 	@Override
