@@ -10,4 +10,5 @@ public interface TransactionAcceptanceService {
 	Mono<TransactionAcceptance> create(TransactionAcceptanceRqDto transactionAcceptanceRqDto);
 	Flux<TransactionAcceptance> findAll();
 	Flux<TransactionAcceptance> getAllProcessingAcceptance();
+	Mono<TransactionAcceptance> updateStatus(String status, String transactionId);
 }

@@ -1,5 +1,7 @@
 package com.nttdata.lagm.bootcoin.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceService {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(TransactionAcceptanceServiceImpl.class);
 	
 	@Autowired
 	private TransactionAcceptanceRepository transactionAcceptanceRepository;
@@ -51,6 +55,7 @@ public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceSe
 					transactionAcceptance.setDate(Util.getToday());
 					transactionAcceptance.setExchangeRate(exchangeRate);
 					transactionAcceptance.setTransactionId(Util.generateTransactionId());
+					LOGGER.info("transactionId: {}", transactionAcceptance.getTransactionId());
 					transactionAcceptance.setTransactionRequest(transactionRequest);
 					
 					// Validate transactionAcceptance
@@ -125,5 +130,24 @@ public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceSe
 				transactionAcceptance.setAccountNumber(account.getAccountNumber());
 				return Mono.empty();
 			}).then();
+	}
+
+	@Override
+	public Mono<TransactionAcceptance> updateStatus(String status, String transactionId) {
+		return transactionAcceptanceRepository.findAll().filter(
+			transactionAcceptance -> {
+				return transactionAcceptance.getTransactionId().equalsIgnoreCase(transactionId);
+			}).next()
+			.flatMap(transactionAcceptance -> {
+				transactionAcceptance.setStatus(status);
+				transactionAcceptance.getTransactionRequest().setStatus(status);
+				
+				return transactionRequestRepository.findAll().filter(tr -> tr.getId().toString().equals(transactionAcceptance.getTransactionRequest().getId().toString()))
+					.next().flatMap(transactionRequest -> {
+						transactionRequest.setStatus(status);
+						transactionRequestRepository.save(transactionRequest).subscribe();
+						return transactionAcceptanceRepository.save(transactionAcceptance);
+					});
+			});
 	}
 }
