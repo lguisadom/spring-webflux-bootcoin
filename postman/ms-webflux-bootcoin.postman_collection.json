@@ -115,30 +115,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "findByIdentification",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8091/api/v1/wallet/find/identification/46687135",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8091",
-							"path": [
-								"api",
-								"v1",
-								"wallet",
-								"find",
-								"identification",
-								"46687135"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
