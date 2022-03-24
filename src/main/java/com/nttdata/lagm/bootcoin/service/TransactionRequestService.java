@@ -1,6 +1,6 @@
 package com.nttdata.lagm.bootcoin.service;
 
-import com.nttdata.lagm.bootcoin.controller.dto.request.TransactionRequestRqDto;
+import com.nttdata.lagm.bootcoin.dto.request.TransactionRequestRqDto;
 import com.nttdata.lagm.bootcoin.model.TransactionRequest;
 
 import reactor.core.publisher.Flux;

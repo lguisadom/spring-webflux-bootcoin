@@ -28,6 +28,7 @@ public class TransactionRequest {
 	@JsonSerialize(using = ToStringSerializer.class)
 	private ObjectId id;
 	private String identification;
+	private String accountNumber;
 	private BigDecimal amount;
 	private String transactionType;
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")

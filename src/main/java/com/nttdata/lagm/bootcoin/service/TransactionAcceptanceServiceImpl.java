@@ -3,7 +3,7 @@ package com.nttdata.lagm.bootcoin.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nttdata.lagm.bootcoin.controller.dto.request.TransactionAcceptanceRqDto;
+import com.nttdata.lagm.bootcoin.dto.request.TransactionAcceptanceRqDto;
 import com.nttdata.lagm.bootcoin.kafka.producer.KafkaTransactionAcceptanceProducer;
 import com.nttdata.lagm.bootcoin.model.TransactionAcceptance;
 import com.nttdata.lagm.bootcoin.model.TransactionRequest;
@@ -92,17 +92,17 @@ public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceSe
 	}
 	
 	private Mono<Void> checkExistsAccount(TransactionAcceptance transactionAcceptance) {
-		String sellerIdentificacion = transactionAcceptance.getSellerIdentification();
-		String buyerIdentification = transactionAcceptance.getTransactionRequest().getIdentification();
 		String transactionType = transactionAcceptance.getTransactionRequest().getTransactionType();
 		
 		if (Constants.TRANSACTION_TYPE_TRANSFER.equalsIgnoreCase(transactionType)) {
 			// Valida que tengan cuenta bancaria
-			return checkAccountNumberByIdentification(sellerIdentificacion)
-					.mergeWith(checkAccountNumberByIdentification(buyerIdentification))
+			return checkAccountNumberByIdentification(transactionAcceptance)
+					//.mergeWith(checkAccountNumberByIdentification(buyerIdentification))
 					.then();
+			
 		} else if (Constants.TRANSACTION_TYPE_YANQUI.equalsIgnoreCase(transactionType)) {
 			// TODO: Validar que tengan cuenta en aplicativo Yanqui
+			
 		}
 		
 		return Mono.empty();
@@ -117,9 +117,13 @@ public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceSe
 		return Mono.empty();
 	} 
 	
-	private Mono<Void> checkAccountNumberByIdentification(String identification) {
-		return accountProxy.findByDni(identification)
-			.switchIfEmpty(Mono.error(new Exception("Cuenta bancaria con identificación: " + identification + " no existe")))
-			.then();
+	private Mono<Void> checkAccountNumberByIdentification(TransactionAcceptance transactionAcceptance) {
+		String sellerIdentification = transactionAcceptance.getSellerIdentification();
+		return accountProxy.findByDni(sellerIdentification)
+			.switchIfEmpty(Mono.error(new Exception("Cuenta bancaria con identificación: " + sellerIdentification + " no existe")))
+			.flatMap(account -> {
+				transactionAcceptance.setAccountNumber(account.getAccountNumber());
+				return Mono.empty();
+			}).then();
 	}
 }

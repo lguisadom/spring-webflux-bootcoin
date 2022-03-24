@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nttdata.lagm.bootcoin.controller.dto.request.TransactionRequestRqDto;
+import com.nttdata.lagm.bootcoin.dto.request.TransactionRequestRqDto;
 import com.nttdata.lagm.bootcoin.model.TransactionRequest;
 import com.nttdata.lagm.bootcoin.service.TransactionRequestService;
 

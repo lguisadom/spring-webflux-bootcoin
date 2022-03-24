@@ -3,7 +3,7 @@ package com.nttdata.lagm.bootcoin.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nttdata.lagm.bootcoin.controller.dto.request.TransactionRequestRqDto;
+import com.nttdata.lagm.bootcoin.dto.request.TransactionRequestRqDto;
 import com.nttdata.lagm.bootcoin.model.TransactionRequest;
 import com.nttdata.lagm.bootcoin.proxy.AccountProxy;
 import com.nttdata.lagm.bootcoin.repository.TransactionRequestRepository;
@@ -66,12 +66,11 @@ public class TransactionRequestServiceImpl implements TransactionRequestService 
 	}
 	
 	private Mono<Void> checkExistsAccount(TransactionRequest transactionRequest) {
-		String buyerIdentification = transactionRequest.getIdentification();
 		String transactionType = transactionRequest.getTransactionType();
 		
 		if (Constants.TRANSACTION_TYPE_TRANSFER.equalsIgnoreCase(transactionType)) {
 			// Valida que tenga cuenta bancaria
-			return checkAccountNumberByIdentification(buyerIdentification)
+			return checkAccountNumberByIdentification(transactionRequest)
 					.then();
 		} else if (Constants.TRANSACTION_TYPE_YANQUI.equalsIgnoreCase(transactionType)) {
 			// TODO: Validar que tengan cuenta en aplicativo Yanqui
@@ -81,9 +80,13 @@ public class TransactionRequestServiceImpl implements TransactionRequestService 
 		return Mono.empty();
 	}
 	
-	private Mono<Void> checkAccountNumberByIdentification(String identification) {
+	private Mono<Void> checkAccountNumberByIdentification(TransactionRequest transactionRequest) {
+		String identification = transactionRequest.getIdentification();
 		return accountProxy.findByDni(identification)
 			.switchIfEmpty(Mono.error(new Exception("Cuenta bancaria con identificación: " + identification + " no existe")))
-			.then();
+			.flatMap(account -> {
+				transactionRequest.setAccountNumber(account.getAccountNumber());
+				return Mono.empty();
+			}).then();
 	}
 }

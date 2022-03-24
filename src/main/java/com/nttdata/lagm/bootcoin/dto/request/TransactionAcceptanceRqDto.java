@@ -1,4 +1,4 @@
-package com.nttdata.lagm.bootcoin.controller.dto.request;
+package com.nttdata.lagm.bootcoin.dto.request;
 
 import lombok.Data;
 
