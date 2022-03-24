@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"purchase\": 5,\r\n    \"sale\":  6\r\n}",
+							"raw": "{\r\n    \"purchase\": 6,\r\n    \"sale\":  5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -93,7 +93,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"identification\": \"46687132\",\r\n    \"cellphone\": \"966389314\",\r\n    \"email\": \"luisguisado@gmail.com\",\r\n    \"amount\": 150.5\r\n}",
+							"raw": "{\r\n    \"identification\": \"12345678\",\r\n    \"cellphone\": \"966389314\",\r\n    \"email\": \"luisguisado@gmail.com\",\r\n    \"amount\": 150.5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -115,6 +115,30 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "findByIdentification",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/api/v1/wallet/find/identification/46687135",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"wallet",
+								"find",
+								"identification",
+								"46687135"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -122,13 +146,13 @@
 			"name": "TransactionRequest - Solicitud de compra",
 			"item": [
 				{
-					"name": "create - Crea solicitud de compra tipo yanqui",
+					"name": "create - tipo TRANSFERENCIA Crea solicitud de compra",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"identification\": \"46687138\",\r\n    \"amount\": 15,\r\n    \"transactionType\": 1\r\n}",
+							"raw": "{\r\n    \"identification\": \"12345678\",\r\n    \"amount\": 1,\r\n    \"transactionType\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -153,13 +177,13 @@
 					"response": []
 				},
 				{
-					"name": "create - Crea solicitud de compra tipo transferencia",
+					"name": "create - tipo YANQUI Crea solicitud de compra",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"identification\": \"46687138\",\r\n    \"amount\": 15,\r\n    \"transactionType\": 2\r\n}",
+							"raw": "{\r\n    \"identification\": \"46687132\",\r\n    \"amount\": 15,\r\n    \"transactionType\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -240,7 +264,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"sellerIdentification\": \"46687130\",\r\n    \"idTransactionRequest\": \"623bc27dd87dcc1b37b07e9f\"\r\n}",
+							"raw": "{\r\n    \"sellerIdentification\": \"09557358\",\r\n    \"idTransactionRequest\": \"623c67453736a776de364f53\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -271,7 +295,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"sellerIdentification\": \"46687130\",\r\n    \"idTransactionRequest\": \"623bc27fd87dcc1b37b07ea0\"\r\n}",
+							"raw": "{\r\n    \"sellerIdentification\": \"46687130\",\r\n    \"idTransactionRequest\": \"623c44664ab34f4bc2e1076c\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -318,7 +342,7 @@
 					"response": []
 				},
 				{
-					"name": "get Active Request - Consulta aceptaciones de solicitudes de compra activas",
+					"name": "get Active Request - Consulta aceptaciones en proceso",
 					"request": {
 						"method": "GET",
 						"header": [],
