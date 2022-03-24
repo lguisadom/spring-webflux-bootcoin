@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 public class TransactionRequestServiceImpl implements TransactionRequestService {
 
 	@Autowired
-	private TransactionRequestRepository transactionRequestrepository;
+	private TransactionRequestRepository transactionRequestRepository;
 	
 	@Autowired
 	private WalletRepository walletRepository;
@@ -40,16 +40,16 @@ public class TransactionRequestServiceImpl implements TransactionRequestService 
 
 	@Override
 	public Flux<TransactionRequest> findAll() {
-		return transactionRequestrepository.findAll();
+		return transactionRequestRepository.findAll();
 	}
 
 	@Override
 	public Flux<TransactionRequest> getAllActiveRequest() {
-		return transactionRequestrepository.findAll().filter(t -> Constants.STATUS_ACTIVE.equalsIgnoreCase(t.getStatus()));
+		return transactionRequestRepository.findAll().filter(t -> Constants.STATUS_ACTIVE.equalsIgnoreCase(t.getStatus()));
 	}
 	
 	private Mono<TransactionRequest> save(TransactionRequest transactionRequest) {
-		return transactionRequestrepository.save(transactionRequest);
+		return transactionRequestRepository.save(transactionRequest);
 	}
 	
 	private Mono<Void> checkConditions(TransactionRequest transactionRequest) {

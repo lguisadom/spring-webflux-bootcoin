@@ -49,7 +49,6 @@ public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceSe
 					TransactionAcceptance transactionAcceptance = new TransactionAcceptance();
 					transactionAcceptance.setSellerIdentification(transactionAcceptanceRqDto.getSellerIdentification());
 					transactionAcceptance.setDate(Util.getToday());
-					transactionAcceptance.setStatus(Constants.STATUS_PROCESSING);
 					transactionAcceptance.setExchangeRate(exchangeRate);
 					transactionAcceptance.setTransactionId(Util.generateTransactionId());
 					transactionAcceptance.setTransactionRequest(transactionRequest);
@@ -72,16 +71,18 @@ public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceSe
 		return transactionAcceptanceRepository.findAll().filter(t -> Constants.STATUS_PROCESSING.equalsIgnoreCase(t.getStatus()));
 	}
 	
-	private Mono<TransactionAcceptance> save(TransactionRequest transactionRequest, TransactionAcceptance transactionAcceptance) {
-		transactionRequest.setStatus(Constants.STATUS_PROCESSING);
-		transactionAcceptance.setTransactionRequest(transactionRequest);
-		transactionRequestRepository.save(transactionRequest).subscribe();
-		
-		// Send message
-		kafkaTransactionAcceptanceProducer.sendMessage(transactionAcceptance);
-		
+	private Mono<TransactionAcceptance> save(TransactionRequest transactionRequest, TransactionAcceptance transactionAcceptance) {		
 		// After validations to send to MS to register the transaction
-		return transactionAcceptanceRepository.save(transactionAcceptance);
+		transactionAcceptance.setTransactionRequest(transactionRequest);
+		transactionAcceptance.setStatus(Constants.STATUS_PROCESSING);
+		return transactionAcceptanceRepository.save(transactionAcceptance)
+			.flatMap(txAcceptance -> {
+				transactionRequest.setStatus(Constants.STATUS_PROCESSING);
+				transactionRequestRepository.save(transactionRequest).subscribe();
+				// Send message
+				kafkaTransactionAcceptanceProducer.sendMessage(transactionAcceptance);
+				return Mono.just(txAcceptance);
+			});
 	}
 	
 	private Mono<Void> checkConditions(TransactionAcceptance transactionAcceptance) {
