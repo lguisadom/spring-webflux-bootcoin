@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.nttdata.lagm.bootcoin.model.ExchangeRate;
-import com.nttdata.lagm.bootcoin.model.TransactionAcceptance;
 
 import reactor.core.publisher.Mono;
 

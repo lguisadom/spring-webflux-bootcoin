@@ -1,4 +1,4 @@
-package com.nttdata.lagm.bootcoin.service.util;
+package com.nttdata.lagm.bootcoin.util;
 
 public class Constants {	
 	public static final String STATUS_ACTIVE = "ACTIVA";

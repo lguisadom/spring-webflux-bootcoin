@@ -1,4 +1,4 @@
-package com.nttdata.lagm.bootcoin.service.util;
+package com.nttdata.lagm.bootcoin.util;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

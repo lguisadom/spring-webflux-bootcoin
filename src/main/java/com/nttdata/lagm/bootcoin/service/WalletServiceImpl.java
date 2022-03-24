@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.nttdata.lagm.bootcoin.model.Wallet;
 import com.nttdata.lagm.bootcoin.repository.WalletRepository;
-import com.nttdata.lagm.bootcoin.service.util.Util;
+import com.nttdata.lagm.bootcoin.util.Util;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

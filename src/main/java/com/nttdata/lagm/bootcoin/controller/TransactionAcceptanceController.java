@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nttdata.lagm.bootcoin.controller.dto.request.TransactionAcceptanceRqDto;
 import com.nttdata.lagm.bootcoin.model.TransactionAcceptance;
+import com.nttdata.lagm.bootcoin.proxy.AccountProxy;
 import com.nttdata.lagm.bootcoin.service.TransactionAcceptanceService;
+import com.nttdata.lagm.bootcoin.util.Constants;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

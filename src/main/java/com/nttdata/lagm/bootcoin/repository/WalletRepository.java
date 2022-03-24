@@ -5,7 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.nttdata.lagm.bootcoin.model.Wallet;
 
+import reactor.core.publisher.Mono;
+
 @Repository
 public interface WalletRepository extends ReactiveMongoRepository<Wallet, String> {
-
 }
