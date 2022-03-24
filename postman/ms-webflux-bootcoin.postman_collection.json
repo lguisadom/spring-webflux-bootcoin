@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "33c82e84-4a76-49a0-88f7-d3d9140b6825",
-		"name": "spring-webflux-bootcoin",
+		"name": "ms-webflux-bootcoin",
 		"description": "El banco debe poder establecer la tasa de compra y venta de Soles a BootCoin",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -211,7 +211,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/api/v1/transaction/request/activeRequest",
+							"raw": "http://localhost:8091/api/v1/transaction/request/active",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -222,7 +222,7 @@
 								"v1",
 								"transaction",
 								"request",
-								"activeRequest"
+								"active"
 							]
 						}
 					},
@@ -234,13 +234,35 @@
 			"name": "TransactionAcceptance - Aceptación de compra de bitcoin",
 			"item": [
 				{
+					"name": "findAll - Lista todas las aceptaciones a solicitud de compra",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/api/v1/transaction/acceptance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"acceptance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "create - Crea Aceptación de solicitud  de compra",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idTransactionRequest\": \"623ba11735782507af6d792d\"\r\n}",
+							"raw": "{\r\n    \"idTransactionRequest\": \"623bba078ec97d27b000b03b\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -271,7 +293,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idTransactionRequest\": \"623ba11835782507af6d792e\"\r\n}",
+							"raw": "{\r\n    \"idTransactionRequest\": \"623bba088ec97d27b000b03c\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -290,6 +312,29 @@
 								"v1",
 								"transaction",
 								"acceptance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Active Request - Consulta aceptaciones de solicitudes de compra activas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/api/v1/transaction/acceptance/processing",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"acceptance",
+								"processing"
 							]
 						}
 					},
