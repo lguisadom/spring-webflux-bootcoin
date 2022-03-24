@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import com.nttdata.lagm.bootcoin.kafka.message.TransactionAcceptanceMessage;
+import com.nttdata.lagm.bootcoin.model.TransactionAcceptance;
 
 @Component
 public class KafkaTransactionAcceptanceProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaTransactionAcceptanceProducer.class);
 
-    private final KafkaTemplate<String, TransactionAcceptanceMessage> kafkaTemplate;
+    private final KafkaTemplate<String, TransactionAcceptance> kafkaTemplate;
 
-    public KafkaTransactionAcceptanceProducer(@Qualifier("kafkaTransactionAcceptanceTemplate") KafkaTemplate<String, TransactionAcceptanceMessage> kafkaTemplate) {
+    public KafkaTransactionAcceptanceProducer(@Qualifier("kafkaTransactionAcceptanceTemplate") KafkaTemplate<String, TransactionAcceptance> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendMessage(TransactionAcceptanceMessage transactionAcceptanceMessage) {
-        LOGGER.info("Producing message {}", transactionAcceptanceMessage);
-        this.kafkaTemplate.send("TOPIC-Transaction-Acceptance", transactionAcceptanceMessage);
+    public void sendMessage(TransactionAcceptance transactionAcceptance) {
+        LOGGER.info("Producing message {}", transactionAcceptance);
+        this.kafkaTemplate.send("TOPIC-Transaction-Acceptance", transactionAcceptance);
     }
 
 }

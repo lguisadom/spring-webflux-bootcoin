@@ -45,10 +45,10 @@ public class TransactionAcceptanceServiceImpl implements TransactionAcceptanceSe
 				transactionAcceptance.setTransactionRequest(transactionRequest);
 				transactionRequest.setStatus(Constants.STATUS_PROCESSING);
 				
-				TransactionAcceptanceMessage transactionAcceptanceMessage = new TransactionAcceptanceMessage();
-				transactionAcceptanceMessage.setId("1");
-				transactionAcceptanceMessage.setSellerIdentification(transactionRequest.getIdentification());
-				kafkaTransactionAcceptanceProducer.sendMessage(transactionAcceptanceMessage);
+//				TransactionAcceptanceMessage transactionAcceptanceMessage = new TransactionAcceptanceMessage();
+//				transactionAcceptanceMessage.setId("1");
+//				transactionAcceptanceMessage.setSellerIdentification(transactionRequest.getIdentification());
+				kafkaTransactionAcceptanceProducer.sendMessage(transactionAcceptance);
 				
 				// After validations to send to MS to register the transaction
 				return transactionAcceptanceRepository.save(transactionAcceptance);
